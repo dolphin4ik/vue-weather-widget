@@ -1,7 +1,9 @@
 import Vue from 'vue';
-import App from './App.vue';
+import store from './store';
+import Weather from './Weather.vue';
 
 new Vue({
 	el: 'vww',
-	render: h => h(App)
+	store,
+	render: h => h(Weather)
 });
