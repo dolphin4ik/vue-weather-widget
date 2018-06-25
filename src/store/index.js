@@ -31,19 +31,9 @@ const store = new Vuex.Store({
             Object.assign(state, payload);
         }
     },
-    getters: {
-        tempC: s => s.tempF ? Math.ceil((s.tempF - 32) / 1.8) : false
-    },
     actions: {
         init: ({commit}, payload) => {
             commit('init', payload);
-
-            // commit('setCity', payload.city);
-            // commit('setCountry', payload.country);
-            // commit('setTempF', parseInt(payload.tempF));
-            // commit('setDescription', payload.description);
-            // commit('setForecast', payload.forecast);
-            
         },
         initFromApi: ({dispatch}) => {
 
@@ -53,6 +43,7 @@ const store = new Vuex.Store({
             .then(resp => resp.json())
             .then(data => {
                 let w = data.query.results.channel;
+                w.item.forecast.shift();
                 dispatch('init', {
                     city: w.location.city,
                     country: w.location.country,
