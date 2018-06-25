@@ -26,22 +26,28 @@ const store = new Vuex.Store({
         },
         setForecast(state, payload){
             state.forecast = payload;
+        },
+        init(state, payload){
+            Object.assign(state, payload);
         }
     },
     getters: {
-        tempC: s => s.tempF ? (s.tempF - 32) / 1.8 : false
+        tempC: s => s.tempF ? Math.ceil((s.tempF - 32) / 1.8) : false
     },
     actions: {
         init: ({commit}, payload) => {
+            commit('init', payload);
 
-            commit('setCity', payload.city);
-            commit('setCountry', payload.country);
-            commit('setTempF', parseInt(payload.tempF));
-            commit('setDescription', payload.description);
-            commit('setForecast', payload.forecast);
+            // commit('setCity', payload.city);
+            // commit('setCountry', payload.country);
+            // commit('setTempF', parseInt(payload.tempF));
+            // commit('setDescription', payload.description);
+            // commit('setForecast', payload.forecast);
             
         },
         initFromApi: ({dispatch}) => {
+
+            console.info(`Updating from API`);
 
             fetch('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22saint-petersburg%2C%20leningradskaya%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
             .then(resp => resp.json())
@@ -56,7 +62,7 @@ const store = new Vuex.Store({
                 })
             })
             .catch(err => {
-                console.log('err',err)
+                console.log(`err Updating from API`,err)
             });
 
         }
