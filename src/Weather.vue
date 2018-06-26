@@ -1,7 +1,7 @@
 <template>
 	<div class="weather-widget">
 		<div class="card bg-dark text-white">
-			<img src="http://celebwallpapers.net/wp-content/uploads/2017/11/iphone-x-wallpaper-pack-1-beautiful-i-phone-wallpaper-of-i-phone-wallpaper-200x300.png" alt="image" class="card-img">
+			<img src="./assets/space.png" alt="image" class="card-img">
 			<div class="card-img-overlay">
 				<h4 class="display-4 text-center">{{ city }}</h4>
 				<p class="text-center lead text-muted">{{ country }}</p>
@@ -10,7 +10,7 @@
 			</div>
 			<forecast v-bind:list="forecast" />
 		</div>
-		<img title="Options" class="widget-menu-icon" src="https://png.icons8.com/small/50/ffffff/menu-2.png" />
+		<img title="Options" class="widget-menu-icon" src="./assets/menu.png" />
 	</div>
 </template>
 
